@@ -616,7 +616,7 @@ function Dashboard() {
         message: 'Logout successful! Redirecting...',
         severity: 'success'
       });
-      setTimeout(() => navigate(withBasePath('/login')), 1500);
+      setTimeout(() => navigate('login'), 1500);
     } catch (error) {
       console.error('Logout error:', error);
       setNotification({
