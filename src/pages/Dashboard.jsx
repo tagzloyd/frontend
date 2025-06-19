@@ -594,7 +594,7 @@ function Dashboard() {
             message: 'Session expired. Please log in again.',
             severity: 'warning'
           });
-          setTimeout(() => navigate(withBasePath('/login')), 1500);
+          setTimeout(() => navigate(('/login')), 1500);
         }
       }
     };
@@ -627,7 +627,7 @@ function Dashboard() {
 
       if (error.response?.status === 401) {
         localStorage.removeItem('auth_token');
-        setTimeout(() => navigate(withBasePath('/login')), 1500);
+        setTimeout(() => navigate(('/login')), 1500);
       }
     }
   };
