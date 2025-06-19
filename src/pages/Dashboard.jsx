@@ -594,7 +594,7 @@ function Dashboard() {
             message: 'Session expired. Please log in again.',
             severity: 'warning'
           });
-          setTimeout(() => navigate('/login'), 1500);
+          setTimeout(() => navigate(withBasePath('/login')), 1500);
         }
       }
     };
@@ -616,9 +616,7 @@ function Dashboard() {
         message: 'Logout successful! Redirecting...',
         severity: 'success'
       });
-      setTimeout(() => {
-        window.location.href = '/login'; // Redirect to root /login
-      }, 1500);
+      setTimeout(() => navigate(withBasePath('/login')), 1500);
     } catch (error) {
       console.error('Logout error:', error);
       setNotification({
@@ -629,9 +627,7 @@ function Dashboard() {
 
       if (error.response?.status === 401) {
         localStorage.removeItem('auth_token');
-        setTimeout(() => {
-          window.location.href = '/login'; // Redirect to root /login
-        }, 1500);
+        setTimeout(() => navigate(withBasePath('/login')), 1500);
       }
     }
   };
@@ -649,7 +645,7 @@ function Dashboard() {
   }), [user]);
 
   const authentication = React.useMemo(() => ({
-    signIn: () => navigate('/login'),
+    signIn: () => navigate(withBasePath('/login')),
     signOut: handleLogout,
   }), [navigate]);
 
