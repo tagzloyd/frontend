@@ -50,9 +50,6 @@ import Inventory2Icon from '@mui/icons-material/Inventory2';
 import BatteryAlertIcon from '@mui/icons-material/BatteryAlert';
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 
-// === BASE PATH CONFIG ======
-const BASE_PATH = '/IMS';
-
 // Branding configuration - simplified for Toolpad compatibility
 const BRANDING = { segment: 'ims', title: 'INVENTORY MANAGEMENT SYSTEM' };
 
@@ -448,21 +445,6 @@ function DashboardHome() {
   );
 }
 
-function stripBasePath(pathname) {
-  // Remove base path from pathname for internal routing
-  if (pathname.startsWith(BASE_PATH)) {
-    return pathname.slice(BASE_PATH.length) || '/';
-  }
-  return pathname;
-}
-function withBasePath(path) {
-  // Ensure path starts with /
-  const clean = path.startsWith('/') ? path : '/' + path;
-  // Don't double BASE_PATH
-  if (clean.startsWith(BASE_PATH)) return clean;
-  return BASE_PATH + clean;
-}
-
 function DashboardContent({ pathname, user }) {
   // Normalize pathname by removing leading/trailing slashes and splitting
   const normalizedPath = pathname.replace(/^\/|\/$/g, '');
@@ -528,8 +510,8 @@ function Dashboard() {
 
   // Initialize pathname from current URL, removing BASE_PATH, or default to '/dashboard'
   const [pathname, setPathname] = React.useState(() => {
-    const stripped = stripBasePath(window.location.pathname);
-    return stripped === '/' ? 'dashboard' : stripped.replace(/^\/+/g, '');
+    const path = window.location.pathname;
+    return path === '/' ? 'dashboard' : path.replace(/^\/+/g, '');
   });
 
   // Set page title based on pathname
@@ -562,7 +544,7 @@ function Dashboard() {
       navigate: (path) => {
         const nextPath = path.startsWith('/') ? path : `/${path}`;
         setPathname(nextPath.replace(/^\/+/g, ''));
-        window.history.pushState({}, '', withBasePath(nextPath));
+        window.history.pushState({}, '', nextPath);
       },
     };
   }, [pathname]);
@@ -570,7 +552,8 @@ function Dashboard() {
   // Handle browser navigation (back/forward buttons)
   useEffect(() => {
     const handlePopState = () => {
-      setPathname(stripBasePath(window.location.pathname).replace(/^\/+/g, '') || 'dashboard');
+      const path = window.location.pathname;
+      setPathname(path === '/' ? 'dashboard' : path.replace(/^\/+/g, ''));
     };
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
@@ -594,13 +577,13 @@ function Dashboard() {
             message: 'Session expired. Please log in again.',
             severity: 'warning'
           });
-          setTimeout(() => navigate(withBasePath('/login')), 1500);
+          setTimeout(() => router.navigate('/login'), 1500);
         }
       }
     };
 
     fetchUser();
-  }, [navigate]);
+  }, [router]);
 
   // Logout function
   const handleLogout = async () => {
@@ -616,7 +599,7 @@ function Dashboard() {
         message: 'Logout successful! Redirecting...',
         severity: 'success'
       });
-      setTimeout(() => navigate(withBasePath('/login')), 1500);
+      setTimeout(() => router.navigate('/login'), 1500);
     } catch (error) {
       console.error('Logout error:', error);
       setNotification({
@@ -627,7 +610,7 @@ function Dashboard() {
 
       if (error.response?.status === 401) {
         localStorage.removeItem('auth_token');
-        setTimeout(() => navigate(withBasePath('/login')), 1500);
+        setTimeout(() => router.navigate('/login'), 1500);
       }
     }
   };
@@ -645,9 +628,9 @@ function Dashboard() {
   }), [user]);
 
   const authentication = React.useMemo(() => ({
-    signIn: () => navigate(withBasePath('/login')),
+    signIn: () => router.navigate('/login'),
     signOut: handleLogout,
-  }), [navigate]);
+  }), [router]);
 
   const toggleMode = () => setMode((prev) => (prev === 'light' ? 'dark' : 'light'));
 
