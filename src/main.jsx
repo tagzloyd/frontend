@@ -12,15 +12,15 @@ import PublicRoute from './routes/PublicRoute.jsx';
 const router = createBrowserRouter(
   [
     {
-      path: "/IMS",
+      path: "/",
       element: (
         <PublicRoute>
           <AuthLayout title="Welcome" subtitle="Choose an option">
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              <a href="/IMS/login" className="mui-login-button" style={{ textAlign: 'center', textDecoration: 'none' }}>
+              <a href="/login" className="mui-login-button" style={{ textAlign: 'center', textDecoration: 'none' }}>
                 Login
               </a>
-              <a href="/IMS/signup" className="mui-login-button" style={{ 
+              <a href="/signup" className="mui-login-button" style={{ 
                 textAlign: 'center', 
                 textDecoration: 'none',
                 backgroundColor: 'transparent',
@@ -36,7 +36,7 @@ const router = createBrowserRouter(
       )
     },
     {
-      path: '/IMS/login',
+      path: '/login',
       element: (
         <PublicRoute>
           <LoginPage />
@@ -44,7 +44,7 @@ const router = createBrowserRouter(
       )
     },
     {
-      path: '/IMS/signup',
+      path: '/signup',
       element: (
         <PublicRoute>
           <SignUpPage />
