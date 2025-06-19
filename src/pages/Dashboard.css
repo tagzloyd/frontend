@@ -1,0 +1,401 @@
+/* Main Layout */
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f7fa;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  width: 250px;
+  background-color: #2c3e50;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+}
+
+.sidebar-header {
+  padding: 0 20px 20px;
+  border-bottom: 1px solid #34495e;
+}
+
+.sidebar-header h2 {
+  margin: 0;
+  font-size: 18px;
+  color: #ecf0f1;
+}
+
+.sidebar-menu {
+  flex: 1;
+  padding: 20px 0;
+}
+
+.sidebar-menu ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-menu li {
+  padding: 12px 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s;
+}
+
+.sidebar-menu li:hover {
+  background-color: #34495e;
+}
+
+.sidebar-menu li.active {
+  background-color: #3498db;
+}
+
+.menu-icon {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+.sidebar-footer {
+  padding: 20px;
+  border-top: 1px solid #34495e;
+}
+
+.inventory-alert {
+  display: flex;
+  align-items: center;
+  background-color: #e74c3c;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.alert-icon {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.alert-title {
+  font-size: 12px;
+}
+
+.alert-count {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Dashboard Content Styles */
+.dashboard {
+  flex: 1;
+  padding: 20px;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.dashboard-header h1 {
+  color: #2c3e50;
+  font-size: 28px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.btn.primary {
+  background-color: #3498db;
+  color: white;
+}
+
+.btn.secondary {
+  background-color: #ecf0f1;
+  color: #2c3e50;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.stat-card {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.stat-card h3 {
+  margin-top: 0;
+  color: #7f8c8d;
+  font-size: 14px;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.stat-change {
+  font-size: 14px;
+}
+
+.stat-change.up {
+  color: #2ecc71;
+}
+
+.stat-change.down {
+  color: #e74c3c;
+}
+
+.dashboard-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+.chart-container, .recent-activity {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.chart-placeholder {
+  height: 300px;
+  background: #f9f9f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #95a5a6;
+  border-radius: 4px;
+  margin-top: 15px;
+}
+
+.recent-activity h2, .chart-container h2 {
+  margin-top: 0;
+  color: #2c3e50;
+  font-size: 18px;
+}
+
+.activity-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.activity-list li {
+  padding: 10px 0;
+  border-bottom: 1px solid #ecf0f1;
+}/* General Reset for layout */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body and dashboard background 
+
+
+
+/* Header */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e0e0e0; /* Light separator */
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+}
+
+.dashboard-header h1 {
+  font-size: 26px;
+  font-weight: 500;
+  color: #333;
+}
+
+.header-actions {
+  display: flex;
+  gap: 16px;
+}
+
+/* Buttons */
+.btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 8px;  /* Rounded corners */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.btn.logout {
+  background-color: #d32f2f;
+}
+
+.btn.logout:hover {
+  background-color: #c62828;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+/* Container Styling */
+.container {
+  background-color: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* More depth for the container */
+  margin-top: 20px;
+}
+
+.container-header {
+  margin-bottom: 20px;
+}
+
+.container-header h2 {
+  font-size: 24px;
+  color: #333;
+  font-weight: 500;
+}
+
+.container-body {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* For responsiveness */
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 16px;
+  }
+
+  .container {
+    padding: 16px;
+  }
+
+  .btn {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}
+/* Settings Dropdown with Icon Styles */
+.settings-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.settings-dropdown .btn.settings {
+  background-color: transparent;
+  color: #2c3e50;
+  padding: 8px;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.settings-dropdown .btn.settings:hover {
+  background-color: #ecf0f1;
+  color: #3498db;
+}
+
+.settings-dropdown .dropdown-content {
+  position: absolute;
+  right: 0;
+  background-color: #fff;
+  width: 240px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  border-radius: 8px;
+  padding: 12px 0;
+  margin-top: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.settings-dropdown .dropdown-item {
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.2s;
+}
+
+.settings-dropdown .dropdown-item:hover {
+  background-color: #f8f9fa;
+}
+
+.dropdown-icon {
+  margin-right: 12px;
+  color: #7f8c8d;
+  min-width: 20px;
+}
+
+.dropdown-text {
+  color: #2c3e50;
+  font-size: 14px;
+}
+
+.settings-dropdown .btn.logout {
+  background-color: transparent;
+  color: #d32f2f;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  width: 100%;
+  text-align: left;
+  display: flex;
+  align-items: center;
+}
+
+.settings-dropdown .btn.logout:hover {
+  color: #c62828;
+}
+
+.settings-dropdown .btn.logout span {
+  margin-left: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .settings-dropdown .dropdown-content {
+    width: 200px;
+  }
+}
+/* Notification positioning adjustments */
+.MuiSnackbar-root {
+  z-index: 1400; /* Ensure it appears above other elements */
+}
+
+/* Notification content styling */
+.MuiAlert-root {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}

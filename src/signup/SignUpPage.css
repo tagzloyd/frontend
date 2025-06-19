@@ -1,0 +1,28 @@
+/* Additional styles for Sign Up page */
+.mui-name-fields {
+  display: flex;
+  gap: 16px;
+}
+
+.mui-half-width {
+  flex: 1;
+}
+
+.mui-hint-text {
+  margin: 4px 0 0;
+  font-size: 0.75rem;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .mui-name-fields {
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .mui-login-card {
+    padding: 24px;
+    margin: 16px;
+  }
+}
