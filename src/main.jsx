@@ -36,7 +36,7 @@ const router = createBrowserRouter(
       )
     },
     {
-      path: '/login',
+      path: '/IMS/login',
       element: (
         <PublicRoute>
           <LoginPage />
@@ -44,7 +44,7 @@ const router = createBrowserRouter(
       )
     },
     {
-      path: '/signup',
+      path: '/IMS/signup',
       element: (
         <PublicRoute>
           <SignUpPage />
